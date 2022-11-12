@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react';
+import { createContext, useContext, useState } from 'react';
 import T from 'prop-types';
 
 const AuthContext = createContext();
@@ -8,13 +8,23 @@ export const useAuthContext = () => {
   return authValue;
 };
 
-export const AuthProvider = ({ children, ...props }) => (
-  <AuthContext.Provider value={props}>{children}</AuthContext.Provider>
-);
+export const AuthProvider = ({ isInitiallyLogged, children }) => {
+  const [isLogged, setIsLogged] = useState(isInitiallyLogged);
+
+  const handleLogin = () => setIsLogged(true);
+  const handleLogout = () => setIsLogged(false);
+
+  return (
+    <AuthContext.Provider value={{ isLogged, handleLogin, handleLogout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
 
 export const AuthConsumer = AuthContext.Consumer;
 
 AuthProvider.propTypes = {
+  isInitallyLogged: T.bool,
   children: T.node,
 };
 
