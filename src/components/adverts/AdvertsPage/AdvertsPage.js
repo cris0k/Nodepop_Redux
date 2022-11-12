@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
 
 import FiltersForm from './FiltersForm';
 import AdvertsList from './AdvertsList';

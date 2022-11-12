@@ -5,7 +5,7 @@ import useForm from '../../../hooks/useForm';
 const validEmail = ({ email }) => email;
 const validPassword = ({ password }) => password;
 
-function LoginForm({ onSubmit }) {
+function LoginForm({ onSubmit, isLoading }) {
   const {
     formValue: credentials,
     handleChange,
@@ -33,12 +33,15 @@ function LoginForm({ onSubmit }) {
         checked={remember}
         onChange={handleChange}
       />
-      <button disabled={!validate(validEmail, validPassword)}>Login</button>
+      <button disabled={!validate(validEmail, validPassword, () => !isLoading)}>
+        Login
+      </button>
     </form>
   );
 }
 
 LoginForm.propTypes = {
+  isLoading: T.bool,
   onSubmit: T.func.isRequired,
 };
 
