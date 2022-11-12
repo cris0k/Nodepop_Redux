@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { Navigate, useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import AdvertDetail from './AdvertDetail';
 import { getAdvert, deleteAdvert } from '../service';
@@ -10,22 +10,26 @@ function AdvertPage() {
   const { advertId } = useParams();
   const navigate = useNavigate();
   const getAdvertById = useCallback(() => getAdvert(advertId), [advertId]);
-  const { isLoading, error, data: advert } = useQuery(getAdvertById);
+  const { isLoading, data: advert } = useQuery(getAdvertById);
   const mutation = useMutation(deleteAdvert);
 
   const handleDelete = () => {
     mutation.execute(advertId).then(() => navigate('/'));
   };
 
-  if (error?.statusCode === 401 || mutation.error?.statusCode === 401) {
-    return <Navigate to="/login" />;
+  if (isLoading) {
+    return 'Loading...';
   }
 
-  if (error?.statusCode === 404) {
-    return <Navigate to="/404" />;
-  }
-
-  return <>{advert && <AdvertDetail onDelete={handleDelete} {...advert} />}</>;
+  return (
+    advert && (
+      <AdvertDetail
+        onDelete={handleDelete}
+        isLoading={mutation.isLoading}
+        {...advert}
+      />
+    )
+  );
 }
 
 export default AdvertPage;

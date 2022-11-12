@@ -13,18 +13,18 @@ const getFilters = () => storage.get('filters') || defaultFilters;
 const saveFilters = filters => storage.set('filters', filters);
 
 function AdvertsPage() {
-  const { isLoading, error, data: adverts = [] } = useQuery(getAdverts);
   const [filters, setFilters] = useState(getFilters);
+  const { isLoading, data: adverts = [] } = useQuery(getAdverts);
 
   useEffect(() => {
     saveFilters(filters);
   }, [filters]);
 
-  if (error?.statusCode === 401) {
-    return <Navigate to="/login" />;
-  }
-
   const filteredAdverts = filterAdverts(adverts, filters);
+
+  if (isLoading) {
+    return 'Loading...';
+  }
 
   return (
     <>

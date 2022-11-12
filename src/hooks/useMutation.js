@@ -38,7 +38,7 @@ function useMutation(mutation) {
         throw error;
       }
     },
-    [mutation],
+    [mutation, navigate],
   );
 
   return {
