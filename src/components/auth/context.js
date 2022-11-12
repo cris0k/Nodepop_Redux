@@ -1,10 +1,10 @@
-import React from 'react';
+import { createContext, useContext } from 'react';
 import T from 'prop-types';
 
-const AuthContext = React.createContext();
+const AuthContext = createContext();
 
 export const useAuthContext = () => {
-  const authValue = React.useContext(AuthContext);
+  const authValue = useContext(AuthContext);
   return authValue;
 };
 

@@ -1,11 +1,11 @@
-import React from 'react';
+import { useRef, useState } from 'react';
 import T from 'prop-types';
 
 import placeholder from '../../assets/images/placeholder.png';
 
 function InputFile({ onChange, ...props }) {
-  const inputRef = React.createRef(null);
-  const [src, setSrc] = React.useState(null);
+  const inputRef = useRef(null);
+  const [src, setSrc] = useState(null);
 
   const loadSrcFromFile = file => {
     if (!file) {

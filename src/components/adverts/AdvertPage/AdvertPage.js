@@ -1,4 +1,4 @@
-import React from 'react';
+import { useCallback } from 'react';
 import { Navigate, useParams, useNavigate } from 'react-router-dom';
 
 import AdvertDetail from './AdvertDetail';
@@ -9,10 +9,7 @@ import useMutation from '../../../hooks/useMutation';
 function AdvertPage() {
   const { advertId } = useParams();
   const navigate = useNavigate();
-  const getAdvertById = React.useCallback(
-    () => getAdvert(advertId),
-    [advertId],
-  );
+  const getAdvertById = useCallback(() => getAdvert(advertId), [advertId]);
   const { isLoading, error, data: advert } = useQuery(getAdvertById);
   const mutation = useMutation(deleteAdvert);
 

@@ -1,12 +1,12 @@
-import React from 'react';
+import { useState, useCallback } from 'react';
 
 function useMutation(mutation) {
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [error, setError] = React.useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const resetError = () => setError(null);
 
-  const execute = React.useCallback(
+  const execute = useCallback(
     async function (...args) {
       const startExecution = () => {
         resetError();

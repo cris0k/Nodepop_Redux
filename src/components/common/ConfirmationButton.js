@@ -1,8 +1,8 @@
-import React from 'react';
+import { useState } from 'react';
 import T from 'prop-types';
 
 function ConfirmationButton({ confirmation, onConfirm, ...props }) {
-  const [confirmationVisible, setConfirmationVisible] = React.useState(false);
+  const [confirmationVisible, setConfirmationVisible] = useState(false);
 
   const showConfirmation = () => setConfirmationVisible(true);
   const hideConfirmation = () => setConfirmationVisible(false);

@@ -1,11 +1,11 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 
 function useQuery(query) {
-  const [data, setData] = React.useState(undefined);
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [error, setError] = React.useState(null);
+  const [data, setData] = useState(undefined);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const startExecution = () => {
       setError(null);
       setIsLoading(true);

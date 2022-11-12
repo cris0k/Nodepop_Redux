@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import T from 'prop-types';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ import NotFoundPage from './NotFoundPage';
 import Layout from '../layout';
 
 function App({ isInitiallyLogged }) {
-  const [isLogged, setIsLogged] = React.useState(isInitiallyLogged);
+  const [isLogged, setIsLogged] = useState(isInitiallyLogged);
 
   const handleLogin = () => setIsLogged(true);
   const handleLogout = () => setIsLogged(false);

@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 
 import FiltersForm from './FiltersForm';
@@ -14,9 +14,9 @@ const saveFilters = filters => storage.set('filters', filters);
 
 function AdvertsPage() {
   const { isLoading, error, data: adverts = [] } = useQuery(getAdverts);
-  const [filters, setFilters] = React.useState(getFilters);
+  const [filters, setFilters] = useState(getFilters);
 
-  React.useEffect(() => {
+  useEffect(() => {
     saveFilters(filters);
   }, [filters]);
 
