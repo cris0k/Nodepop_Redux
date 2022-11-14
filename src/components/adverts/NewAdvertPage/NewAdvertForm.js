@@ -9,7 +9,7 @@ const validPrice = ({ price }) =>
   !Number.isNaN(price) && Number.isFinite(price) && price >= 0;
 const validTags = ({ tags }) => !!tags.length;
 
-function NewAdvertForm({ onSubmit }) {
+function NewAdvertForm({ onSubmit, isLoading }) {
   const {
     formValue: advert,
     handleChange,
@@ -36,7 +36,9 @@ function NewAdvertForm({ onSubmit }) {
       <input type="number" name="price" value={price} onChange={handleChange} />
       <SelectTags name="tags" value={tags} onChange={handleChange} />
       <InputFile name="photo" onChange={handleChange} />
-      <button disabled={!validate(validName, validPrice, validTags)}>
+      <button
+        disabled={!validate(validName, validPrice, validTags, () => !isLoading)}
+      >
         Save
       </button>
     </form>
@@ -44,6 +46,7 @@ function NewAdvertForm({ onSubmit }) {
 }
 
 NewAdvertForm.propTypes = {
+  isLoading: T.bool,
   onSubmit: T.func.isRequired,
 };
 

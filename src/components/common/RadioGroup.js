@@ -1,6 +1,10 @@
 import T from 'prop-types';
 
-function RadioGroup({ options, value, ...props }) {
+function RadioGroup({ options, value, onChange, ...props }) {
+  const handleChange = ev => {
+    onChange(ev);
+  };
+
   return (
     <div>
       {options.map(({ value: optionValue, label }) => (
@@ -9,6 +13,7 @@ function RadioGroup({ options, value, ...props }) {
             type="radio"
             value={optionValue}
             checked={optionValue === value}
+            onChange={handleChange}
             {...props}
           />
           {label}
@@ -23,9 +28,10 @@ RadioGroup.propTypes = {
     T.shape({
       value: T.string.isRequired,
       label: T.node.isRequired,
-    }).isRequired
+    }).isRequired,
   ).isRequired,
   value: T.string.isRequired,
+  onChange: T.func.isRequired,
 };
 
 export default RadioGroup;

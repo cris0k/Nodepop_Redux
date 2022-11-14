@@ -10,7 +10,7 @@ function EmptyList({ advertsCount }) {
       {advertsCount > 0 ? (
         'Refine your search'
       ) : (
-        <Link to="/adverts/new">Create the first advert</Link>
+        <Link to="new">Create the first advert</Link>
       )}
     </div>
   );

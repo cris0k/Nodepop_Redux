@@ -5,7 +5,7 @@ import { ConfirmationButton } from '../../common';
 import placeholder from '../../../assets/images/placeholder.png';
 import { advert } from '../propTypes';
 
-function AdvertDetail({ name, sale, price, tags, photo, onDelete }) {
+function AdvertDetail({ name, sale, price, tags, photo, onDelete, isLoading }) {
   return (
     <div>
       <p>{name}</p>
@@ -19,7 +19,11 @@ function AdvertDetail({ name, sale, price, tags, photo, onDelete }) {
         height="200"
         style={{ objectFit: 'contain' }}
       />
-      <ConfirmationButton confirmation="Are you sure?" onConfirm={onDelete}>
+      <ConfirmationButton
+        confirmation="Are you sure?"
+        onConfirm={onDelete}
+        disabled={isLoading}
+      >
         Delete
       </ConfirmationButton>
     </div>
@@ -30,6 +34,7 @@ AdvertDetail.propTypes = {
   ...advert,
   photo: T.string,
   onDelete: T.func.isRequired,
+  isLoading: T.bool,
 };
 
 AdvertDetail.defaultProps = {

@@ -1,12 +1,14 @@
-import React from 'react';
+import { useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function useMutation(mutation) {
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [error, setError] = React.useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const resetError = () => setError(null);
 
-  const execute = React.useCallback(
+  const execute = useCallback(
     async function (...args) {
       const startExecution = () => {
         resetError();
@@ -27,10 +29,16 @@ function useMutation(mutation) {
         return result;
       } catch (error) {
         finishExecution(error);
+        if (error.statusCode === 401) {
+          navigate('/login');
+        }
+        if (error.statusCode === 404) {
+          navigate('/404');
+        }
         throw error;
       }
     },
-    [mutation],
+    [mutation, navigate],
   );
 
   return {
