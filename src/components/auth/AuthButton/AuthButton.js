@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getIsLogged } from '../../../store/selectors';
 import { authLogout } from '../../../store/actions';
 
-const AuthButton = ({ handleLogout}) => {
+const AuthButton = () => {
   const isLogged = useSelector(getIsLogged)
   const dispatch = useDispatch()
   const mutation = useMutation(logout);
