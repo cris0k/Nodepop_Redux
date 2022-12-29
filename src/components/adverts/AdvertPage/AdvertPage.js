@@ -15,7 +15,8 @@ function AdvertPage() {
   //const { isLoading, data: advert } = useQuery(getAdvertById);
   const mutation = useMutation(deleteAdvert);
 
-  const advert = useSelector(state=>getAdvert(state, advertId))
+  //const advert = useSelector(state=>getAdvert(state, advertId))
+  const advert = useSelector(getAdvert(advertId))
   
   const handleDelete = () => {
     mutation.execute(advertId).then(() => navigate('/'));
