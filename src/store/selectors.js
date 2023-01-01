@@ -8,4 +8,4 @@ export const getStateAdverts = state => state.adverts;
 export const getAdvert =  advertId => state =>
   getStateAdverts(state).find(advert  => advert.id.toString() === advertId);
 
-  
+  export const getUi = state => state.ui;
