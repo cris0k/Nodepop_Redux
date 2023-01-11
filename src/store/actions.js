@@ -14,6 +14,20 @@ export const authLoginFailure = error => ({
   error: true,
 });
 
+export const authLogin = credentials => {
+  return async function(dispatch, getState, { api }){
+    try {
+      dispatch(authLoginRequest())
+      await api.auth.login(credentials)
+      dispatch(authLoginSuccess())
+
+    } catch (error) {
+      dispatch(authLoginFailure(error))
+      
+    }
+  }
+}
+
 export const authLogout = () => ({
   type: AUTH_LOGOUT,
 });

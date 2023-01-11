@@ -1,10 +1,8 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-
-import { login } from '../service';
 import LoginForm from './LoginForm';
 import { useDispatch, useSelector } from 'react-redux';
-import { authLoginFailure, authLoginRequest, authLoginSuccess, uiResetError } from '../../../store/actions';
+import { authLogin, uiResetError } from '../../../store/actions';
 import { getUi } from '../../../store/selectors';
 
 function LoginPage() {
@@ -15,8 +13,12 @@ function LoginPage() {
   const handleResetError = () => dispatch(uiResetError)
 
   const handleSubmit = async credentials => {
-  
-    try {
+
+    await dispatch(authLogin(credentials))
+    const from = location.state?.from?.pathname || '/';
+    navigate(from, { replace: true });
+    
+    /* try {
       dispatch(authLoginRequest())
       await login(credentials)
       dispatch(authLoginSuccess())
@@ -24,7 +26,7 @@ function LoginPage() {
       navigate(from, { replace: true });
     } catch (error) {
       dispatch(authLoginFailure(error))
-    }
+    } */
     
      
   };
