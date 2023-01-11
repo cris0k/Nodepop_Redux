@@ -4,27 +4,23 @@ import FiltersForm from './FiltersForm';
 import AdvertsList from './AdvertsList';
 import EmptyList from './EmptyList';
 import storage from '../../../utils/storage';
-import { getAdverts } from '../service';
-import { getStateAdverts } from '../../../store/selectors';
+import { getStateAdverts, getUi } from '../../../store/selectors';
 import { defaultFilters, filterAdverts } from './filters';
 //import useQuery from '../../../hooks/useQuery';
 import { useDispatch, useSelector } from 'react-redux';
-import { advertsLoaded } from '../../../store/actions';
+import { advertsLoad } from '../../../store/actions';
 
 const getFilters = () => storage.get('filters') || defaultFilters;
 const saveFilters = filters => storage.set('filters', filters);
 
 function AdvertsPage() {
   const [filters, setFilters] = useState(getFilters);
-  //const { isLoading, data: adverts = [] } = useQuery(getAdverts);
+  const { isLoading } = useSelector(getUi);
   const dispatch = useDispatch()
   
   useEffect(()=>{
-    const execute = async()=>{
-      const adverts = await getAdverts()
-      dispatch(advertsLoaded(adverts))
-    }
-    execute();
+    dispatch(advertsLoad())
+    
   },[dispatch])
 
   useEffect(() => {
@@ -35,10 +31,10 @@ function AdvertsPage() {
 
   const filteredAdverts = filterAdverts(adverts, filters);
 
-  /* if (isLoading) {
+  if (isLoading) {
     return 'Loading...';
   }
- */
+
   return (
     <>
       {adverts.length > 0 && (

@@ -1,8 +1,16 @@
-import { AUTH_LOGIN_SUCCESS, AUTH_LOGOUT, ADVERTS_LOADED, UI_RESET_ERROR} from './types';
+import { 
+  AUTH_LOGIN_SUCCESS, 
+  AUTH_LOGOUT, 
+  ADVERTS_LOADED_SUCCESS, 
+  UI_RESET_ERROR} 
+  from './types';
 
 const defaultState = {
   auth: false,
-  adverts: [],
+  adverts: {
+    areLoaded: false,
+    data: []
+  },
   ui: {
     isLoading: false,
     error: null
@@ -21,8 +29,8 @@ export function auth(state = defaultState.auth, action) {
 }
 
 export function adverts(state = defaultState.adverts, action) {
-  if (action.type === ADVERTS_LOADED) {
-    return action.payload;
+  if (action.type === ADVERTS_LOADED_SUCCESS) {
+    return { areLoaded:true, data: action.payload};
   }
   return state;
 }
