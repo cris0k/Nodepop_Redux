@@ -1,5 +1,17 @@
-import { areAdvertsLoaded } from './selectors';
-import { AUTH_LOGIN_SUCCESS, AUTH_LOGOUT, AUTH_LOGIN_REQUEST, AUTH_LOGIN_FAILURE, UI_RESET_ERROR, ADVERTS_LOADED_REQUEST, ADVERTS_LOADED_SUCCESS, ADVERTS_LOADED_FAILURE} from './types';
+import { areAdvertsLoaded, getDetails } from './selectors';
+import { 
+  AUTH_LOGIN_SUCCESS, 
+  AUTH_LOGOUT, 
+  AUTH_LOGIN_REQUEST, 
+  AUTH_LOGIN_FAILURE, 
+  UI_RESET_ERROR, 
+  ADVERTS_LOADED_REQUEST, 
+  ADVERTS_LOADED_SUCCESS, 
+  ADVERTS_LOADED_FAILURE, 
+  DETAILS_LOADED_REQUEST, 
+  DETAILS_LOADED_SUCCESS,
+  DETAILS_LOADED_FAILURE} 
+  from './types';
 
 export const authLoginRequest = () => ({
   type: AUTH_LOGIN_REQUEST,
@@ -58,6 +70,36 @@ export const advertsLoad = ()=>{
       dispatch(advertsLoadedSuccess(adverts))
     } catch (error) {
       dispatch(advertsLoadedFailure(error))
+    }
+  }
+}
+
+export const detailsLoadedRequest = () => ({
+  type: DETAILS_LOADED_REQUEST
+  
+});
+export const detailsLoadedSuccess = advert => ({
+  type: DETAILS_LOADED_SUCCESS,
+  payload: advert,
+});
+export const detailsLoadedFailure = error => ({
+  type: DETAILS_LOADED_FAILURE,
+  payload: error,
+  error: true
+});
+
+export const detailsLoad = advertId =>{
+  return async function(dispatch,getState,{ api }){
+    
+    const isLoaded = getDetails(advertId)(getState()) 
+    if (isLoaded) return ;
+
+    try {
+      dispatch(detailsLoadedRequest())
+      const advert = await api.adverts.getAdvert(advertId)
+      dispatch(detailsLoadedSuccess(advert))
+    } catch (error) {
+      dispatch(detailsLoadedFailure(error))
     }
   }
 }

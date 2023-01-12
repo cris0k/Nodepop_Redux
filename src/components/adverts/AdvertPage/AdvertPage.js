@@ -1,14 +1,22 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import AdvertDetail from './AdvertDetail';
 import { deleteAdvert} from '../service';
-import { useSelector } from 'react-redux';
-import { getAdvert, getUi } from '../../../store/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { getDetails, getUi } from '../../../store/selectors';
+import { useEffect } from 'react';
+import { detailsLoad } from '../../../store/actions';
 
 function AdvertPage() {
   const { advertId } = useParams();
   const navigate = useNavigate();
   const { isLoading } = useSelector(getUi);
-  const advert = useSelector(getAdvert(advertId))
+  const dispatch = useDispatch()
+  const advert = useSelector(getDetails(advertId))
+
+  useEffect(()=>{
+    dispatch(detailsLoad(advertId))
+    
+  },[advertId,dispatch])
   
   const handleDelete = () => {
     deleteAdvert(advertId)
