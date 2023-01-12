@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import T from 'prop-types';
 import { ConfirmationButton } from '../../common';
-import { logout } from '../service';
 import { useDispatch, useSelector } from 'react-redux';
 import { getIsLogged } from '../../../store/selectors';
 import { authLoginFailure, authLogout } from '../../../store/actions';
@@ -12,7 +11,6 @@ const AuthButton = () => {
 
   const handleLogoutConfirm = () => {
     try {
-      logout()
       dispatch(authLogout())
     } catch (error) {
       dispatch(authLoginFailure(error))

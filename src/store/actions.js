@@ -41,9 +41,16 @@ export const authLogin = credentials => {
   }
 }
 
-export const authLogout = () => ({
+export const authLogoutSuccess = () => ({
   type: AUTH_LOGOUT,
 });
+
+export const authLogout = () => {
+  return async function (dispatch, getState, { api }) {
+    await api.auth.logout();
+    dispatch(authLogoutSuccess());
+  };
+};
 
 export const advertsLoadedRequest = () => ({
   type: ADVERTS_LOADED_REQUEST
