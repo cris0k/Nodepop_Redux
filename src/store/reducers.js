@@ -3,7 +3,8 @@ import {
   AUTH_LOGOUT, 
   ADVERTS_LOADED_SUCCESS, 
   UI_RESET_ERROR,
-  DETAILS_LOADED_SUCCESS} 
+  DETAILS_LOADED_SUCCESS,
+  ADVERT_CREATED_SUCCESS} 
   from './types';
 
 export const defaultState = {
@@ -35,6 +36,9 @@ export function adverts(state = defaultState.adverts, action) {
   }
   if (action.type === DETAILS_LOADED_SUCCESS){
     return {...state, data: [action.payload]}
+  }
+  if (action.type === ADVERT_CREATED_SUCCESS) {
+    return { ...state, data: [action.payload, ...state.data] };
   }
   return state;
 }
