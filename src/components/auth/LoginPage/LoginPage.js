@@ -33,6 +33,7 @@ function LoginPage() {
 
   return (
     <div>
+      <h1>Log In</h1>
       <LoginForm onSubmit={handleSubmit} isLoading={isLoading} />
       { isLoading && <p>...login in nodepop </p>}
       {error && (

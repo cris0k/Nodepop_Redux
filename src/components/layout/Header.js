@@ -8,7 +8,9 @@ const isSelected = ({ isActive }) => (isActive ? 'selected' : '');
 function Header() {
   return (
     <header>
+      <h1>
       Nodepop React
+      </h1>
       <nav>
         <ul>
           <li>

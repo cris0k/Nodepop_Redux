@@ -1,3 +1,6 @@
+header {
+  text-align: center;
+}
 .selected {
   color: red;
 }

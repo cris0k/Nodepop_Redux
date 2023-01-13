@@ -6,12 +6,14 @@ import { advert } from '../propTypes';
 
 function Advert({ name, sale, price, tags }) {
   return (
-    <div>
-      <p>{name}</p>
-      <p>{sale ? 'Sell' : 'Buy'}</p>
-      <p>{tags.join(', ')}</p>
-      <p>{price}</p>
-    </div>
+
+      <div className='adMainDetails'>
+        <p>{name}</p>
+        <p>{sale ? 'Sell' : 'Buy'}</p>
+        <p>{tags.join(', ')}</p>
+        <p>{price}</p>
+      </div>
+    
   );
 }
 
@@ -21,7 +23,7 @@ Advert.propTypes = {
 
 function AdvertsList({ adverts }) {
   const renderAdvert = ({ id, ...advert }) => (
-    <li key={id}>
+    <li key={id} >
       <Link to={id}>
         <Advert {...advert} />
       </Link>
