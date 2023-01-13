@@ -27,7 +27,7 @@ function AdvertsPage() {
     saveFilters(filters);
   }, [filters]);
 
-  const adverts = useSelector((state)=>getStateAdverts(state))
+  const adverts = useSelector((state)=>getStateAdverts(state).reverse())
 
   const filteredAdverts = filterAdverts(adverts, filters);
 

@@ -27,6 +27,7 @@ function LoginForm({ onSubmit, isLoading }) {
         value={password}
         onChange={handleChange}
       />
+      <span>Remember</span>
       <input
         type="checkbox"
         name="remember"
