@@ -137,8 +137,7 @@ export const advertCreate = advert => {
   return async function (dispatch, getState, { api }) {
     try {
       dispatch(advertCreatedRequest());
-      const { id } = await api.adverts.createAdvert(advert);
-      const createdAdvert = await api.adverts.getAdvert(id);
+      const createdAdvert = await api.adverts.createAdvert(advert);
       dispatch(advertCreatedSuccess(createdAdvert));
       return createdAdvert;
     } catch (error) {
