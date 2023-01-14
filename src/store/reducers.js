@@ -4,7 +4,8 @@ import {
   ADVERTS_LOADED_SUCCESS, 
   UI_RESET_ERROR,
   DETAILS_LOADED_SUCCESS,
-  ADVERT_CREATED_SUCCESS} 
+  ADVERT_CREATED_SUCCESS,
+  TAGS_LOAD_SUCCESS} 
   from './types';
 
 export const defaultState = {
@@ -12,6 +13,10 @@ export const defaultState = {
   adverts: {
     areLoaded: false,
     data: [],
+  },
+  tags: {
+    areLoaded: false,
+    data:[]
   },
   ui: {
     isLoading: false,
@@ -34,13 +39,21 @@ export function adverts(state = defaultState.adverts, action) {
   if (action.type === ADVERTS_LOADED_SUCCESS) {
     return { areLoaded:true, data: action.payload};
   }
-  if (action.type === DETAILS_LOADED_SUCCESS){
+  if (action.type === DETAILS_LOADED_SUCCESS ){
     return {...state, data: [action.payload]}
   }
-  if (action.type === ADVERT_CREATED_SUCCESS) {
+  if (action.type === ADVERT_CREATED_SUCCESS ) {
     return { ...state, data: [action.payload, ...state.data] };
   }
+  
   return state;
+}
+
+export function tags(state = defaultState.tags, action){
+  if (action.type === TAGS_LOAD_SUCCESS) {
+    return { areLoaded:true, data : action.payload};
+  }
+  return state
 }
 
 export function ui(state = defaultState.ui, action) {
