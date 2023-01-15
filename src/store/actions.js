@@ -67,8 +67,6 @@ export const loginDataFailure =()=>({
 
 export const userLoginData = () =>{
   return async function(dispatch, getState,{api}){
-    const areLoaded = isUserLoaded(getState()) 
-    if (areLoaded) return ;
 
     try {
       dispatch(loginDataRequest())

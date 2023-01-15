@@ -10,7 +10,7 @@ function LoginPage() {
   const location = useLocation();
   const dispatch = useDispatch();
   const { isLoading, error } = useSelector(getUi);
-  const handleResetError = () => dispatch(uiResetError)
+  const handleResetError = () => dispatch(uiResetError())
 
   const handleSubmit = async credentials => {
 

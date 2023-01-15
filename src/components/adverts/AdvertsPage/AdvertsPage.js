@@ -6,7 +6,6 @@ import EmptyList from './EmptyList';
 import storage from '../../../utils/storage';
 import { getStateAdverts, getUi } from '../../../store/selectors';
 import { defaultFilters, filterAdverts } from './filters';
-//import useQuery from '../../../hooks/useQuery';
 import { useDispatch, useSelector } from 'react-redux';
 import { advertsLoad } from '../../../store/actions';
 

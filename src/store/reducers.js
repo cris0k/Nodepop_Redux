@@ -12,8 +12,7 @@ import {
 export const defaultState = {
   auth: false,
   user: {
-    areLoaded: false,
-    data: {}
+    data: ''
   },
   adverts: {
     areLoaded: false,
@@ -42,7 +41,7 @@ export function auth(state = defaultState.auth, action) {
 
 export function user (state = defaultState.user, action) {
   if (action.type === LOGIN_DATA_SUCCESS) {
-    return { areLoaded:true, data: action.payload};
+    return { data: action.payload};
   }
   return state
 }

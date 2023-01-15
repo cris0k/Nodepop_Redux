@@ -37,10 +37,11 @@ function Header() {
           </li>
         </ul>
       </nav>
-      <span>{`Welcome ${data.username}`}</span>
+      <span>{`Welcome ${data}`}</span>
       <AuthButton />
     </header>
-  );
+  )
+  
 }
 
 export default Header;
