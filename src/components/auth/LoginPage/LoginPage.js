@@ -17,17 +17,6 @@ function LoginPage() {
     await dispatch(authLogin(credentials))
     const from = location.state?.from?.pathname || '/';
     navigate(from, { replace: true });
-    
-    /* try {
-      dispatch(authLoginRequest())
-      await login(credentials)
-      dispatch(authLoginSuccess())
-      const from = location.state?.from?.pathname || '/';
-      navigate(from, { replace: true });
-    } catch (error) {
-      dispatch(authLoginFailure(error))
-    } */
-    
      
   };
 

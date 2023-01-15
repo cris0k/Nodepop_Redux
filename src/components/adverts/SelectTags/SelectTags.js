@@ -12,7 +12,7 @@ function SelectTags(props) {
     
   },[dispatch])
 
-  const tags = useSelector(getStateTags)
+  const tags = useSelector((state)=>getStateTags(state))
 
   return <CheckboxGroup options={tags} {...props} />;
 }

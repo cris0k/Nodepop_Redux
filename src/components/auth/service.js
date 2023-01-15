@@ -17,7 +17,11 @@ export const login = ({ remember, ...credentials }) => {
       }
     });
 };
+export const loginData = () => {
+  return client.get(`${authPath}/me`)
+  .then(response=>(response.username))
 
+}
 export const logout = () => {
   return Promise.resolve().then(resetClient).then(storage.clear);
 };

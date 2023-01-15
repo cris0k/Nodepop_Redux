@@ -5,11 +5,15 @@ import {
   UI_RESET_ERROR,
   DETAILS_LOADED_SUCCESS,
   ADVERT_CREATED_SUCCESS,
-  TAGS_LOAD_SUCCESS} 
+  TAGS_LOAD_SUCCESS,
+  LOGIN_DATA_SUCCESS} 
   from './types';
 
 export const defaultState = {
-  auth: false,
+  auth: {
+    logged :false,
+    data: []
+  },
   adverts: {
     areLoaded: false,
     data: [],
@@ -27,7 +31,9 @@ export const defaultState = {
 export function auth(state = defaultState.auth, action) {
   switch (action.type) {
     case AUTH_LOGIN_SUCCESS:
-      return true;
+      return {logged : true}
+    case LOGIN_DATA_SUCCESS:
+      return { data : action.payload}
     case AUTH_LOGOUT:
       return false;
     default:

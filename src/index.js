@@ -22,5 +22,5 @@ root.render(
         <App />
       
     </Root>
-  </React.StrictMode>,
+  </React.StrictMode>
 );

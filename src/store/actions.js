@@ -19,7 +19,10 @@ import {
   ADVERT_DELETE_FAILURE,
   TAGS_LOAD_REQUEST,
   TAGS_LOAD_FAILURE,
-  TAGS_LOAD_SUCCESS} 
+  TAGS_LOAD_SUCCESS,
+  LOGIN_DATA_REQUEST,
+  LOGIN_DATA_SUCCESS,
+  LOGIN_DATA_FAILURE} 
   from './types';
 
 export const authLoginRequest = () => ({
@@ -27,7 +30,7 @@ export const authLoginRequest = () => ({
 });
 
 export const authLoginSuccess = () => ({
-  type: AUTH_LOGIN_SUCCESS,
+  type: AUTH_LOGIN_SUCCESS
 });
 
 export const authLoginFailure = error => ({
@@ -46,6 +49,30 @@ export const authLogin = credentials => {
     } catch (error) {
       dispatch(authLoginFailure(error))
       
+    }
+  }
+}
+
+export const loginDataRequest =()=>({
+  type: LOGIN_DATA_REQUEST
+})
+
+export const loginDataSuccess = userData =>({
+  type: LOGIN_DATA_SUCCESS,
+  payload : userData
+})
+export const loginDataFailure =()=>({
+  type: LOGIN_DATA_FAILURE
+})
+
+export const userLoginData = () =>{
+  return async function(dispatch, getState,{api}){
+    try {
+      dispatch(loginDataRequest())
+      const userData = await api.auth.loginData()
+      dispatch(loginDataSuccess(userData))
+    } catch (error) {
+      dispatch(loginDataFailure())
     }
   }
 }
