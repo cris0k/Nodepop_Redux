@@ -19,7 +19,7 @@ export const login = ({ remember, ...credentials }) => {
 };
 export const loginData = () => {
   return client.get(`${authPath}/me`)
-  .then(response=>(response.username))
+  .then(response=>(response))
 
 }
 export const logout = () => {

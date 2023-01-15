@@ -1,6 +1,7 @@
 export const getIsLogged = state => state.auth;
 
-export const whoIsLogged = state => state.auth.data;
+export const whoIsLogged = state => state.user.data;
+export const isUserLoaded = state => state.user.areLoaded
 
 export const getStateAdverts = state => state.adverts.data;
 

@@ -1,4 +1,4 @@
-import { areAdvertsLoaded, areTagsLoaded, getDetails} from './selectors';
+import { areAdvertsLoaded, areTagsLoaded, getDetails, isUserLoaded} from './selectors';
 import { 
   AUTH_LOGIN_SUCCESS, 
   AUTH_LOGOUT, 
@@ -67,6 +67,9 @@ export const loginDataFailure =()=>({
 
 export const userLoginData = () =>{
   return async function(dispatch, getState,{api}){
+    const areLoaded = isUserLoaded(getState()) 
+    if (areLoaded) return ;
+
     try {
       dispatch(loginDataRequest())
       const userData = await api.auth.loginData()

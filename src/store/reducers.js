@@ -10,9 +10,10 @@ import {
   from './types';
 
 export const defaultState = {
-  auth: {
-    logged :false,
-    data: []
+  auth: false,
+  user: {
+    areLoaded: false,
+    data: {}
   },
   adverts: {
     areLoaded: false,
@@ -31,14 +32,19 @@ export const defaultState = {
 export function auth(state = defaultState.auth, action) {
   switch (action.type) {
     case AUTH_LOGIN_SUCCESS:
-      return {logged : true}
-    case LOGIN_DATA_SUCCESS:
-      return { data : action.payload}
+      return  true
     case AUTH_LOGOUT:
       return false;
     default:
       return state;
   }
+}
+
+export function user (state = defaultState.user, action) {
+  if (action.type === LOGIN_DATA_SUCCESS) {
+    return { areLoaded:true, data: action.payload};
+  }
+  return state
 }
 
 export function adverts(state = defaultState.adverts, action) {

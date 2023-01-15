@@ -37,7 +37,7 @@ function Header() {
           </li>
         </ul>
       </nav>
-      <span>{`Welcome ${data}`}</span>
+      <span>{`Welcome ${data.username}`}</span>
       <AuthButton />
     </header>
   );
