@@ -9,10 +9,12 @@ exports[`LoginPage snapshot 1`] = `
     <form>
       <input
         name="email"
+        placeholder="email"
         value=""
       />
       <input
         name="password"
+        placeholder="password"
         type="password"
         value=""
       />
