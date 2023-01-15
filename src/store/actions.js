@@ -1,4 +1,4 @@
-import { areAdvertsLoaded, areTagsLoaded, getDetails, isUserLoaded} from './selectors';
+import { areAdvertsLoaded, areTagsLoaded, getDetails} from './selectors';
 import { 
   AUTH_LOGIN_SUCCESS, 
   AUTH_LOGOUT, 

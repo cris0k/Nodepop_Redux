@@ -14,8 +14,12 @@ function AdvertPage() {
 
   useEffect(()=>{
     dispatch(detailsLoad(advertId))
+    .catch(error => {
+      if (error.statusCode === 404) {
+        navigate('404');}}
+    )
     
-  },[advertId,dispatch])
+  },[advertId,dispatch,navigate])
   
   const handleDelete = async () => {
     await dispatch(advertDelete(advertId))

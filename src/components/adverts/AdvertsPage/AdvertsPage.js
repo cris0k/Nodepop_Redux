@@ -8,6 +8,7 @@ import { getStateAdverts, getUi } from '../../../store/selectors';
 import { defaultFilters, filterAdverts } from './filters';
 import { useDispatch, useSelector } from 'react-redux';
 import { advertsLoad } from '../../../store/actions';
+import { useNavigate } from 'react-router-dom';
 
 const getFilters = () => storage.get('filters') || defaultFilters;
 const saveFilters = filters => storage.set('filters', filters);
@@ -16,11 +17,17 @@ function AdvertsPage() {
   const [filters, setFilters] = useState(getFilters);
   const { isLoading } = useSelector(getUi);
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   
   useEffect(()=>{
     dispatch(advertsLoad())
+    .catch(error => {
+      if (error.statusCode === 404) {
+      navigate('404');
+      }
+  });
     
-  },[dispatch])
+  },[dispatch,navigate]);
 
   useEffect(() => {
     saveFilters(filters);

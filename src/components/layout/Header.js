@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import {  useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { userLoginData } from '../../store/actions';
-import { whoIsLogged } from '../../store/selectors';
+import { getIsLogged, whoIsLogged } from '../../store/selectors';
 import { AuthButton } from '../auth';
 
 import './Header.css';
@@ -11,10 +11,13 @@ const isSelected = ({ isActive }) => (isActive ? 'selected' : '');
 
 function Header() {
   const dispatch = useDispatch()
+  const isLogged = useSelector(getIsLogged)
 
   useEffect(()=>{
-    dispatch(userLoginData())
-  },[dispatch])
+    if (isLogged){
+      dispatch(userLoginData())
+    }
+  },[dispatch,isLogged])
   
   const data = useSelector((state)=>whoIsLogged(state))
 
@@ -37,7 +40,7 @@ function Header() {
           </li>
         </ul>
       </nav>
-      <span>{`Welcome ${data}`}</span>
+      {isLogged ? <span>{`Welcome ${data}`}</span>: ''}
       <AuthButton />
     </header>
   )
