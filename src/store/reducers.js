@@ -6,7 +6,8 @@ import {
   DETAILS_LOADED_SUCCESS,
   ADVERT_CREATED_SUCCESS,
   TAGS_LOAD_SUCCESS,
-  LOGIN_DATA_SUCCESS} 
+  LOGIN_DATA_SUCCESS,
+  ADVERT_DELETE_SUCCESS} 
   from './types';
 
 export const defaultState = {
@@ -56,9 +57,13 @@ export function adverts(state = defaultState.adverts, action) {
   if (action.type === ADVERT_CREATED_SUCCESS ) {
     return { ...state, data: [action.payload, ...state.data] };
   }
+  if (action.type === ADVERT_DELETE_SUCCESS) {
+    return { ...state, data: state.data.filter(advert => advert.id !== action.payload)};
+  }
   
   return state;
 }
+
 
 export function tags(state = defaultState.tags, action){
   if (action.type === TAGS_LOAD_SUCCESS) {

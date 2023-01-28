@@ -24,7 +24,6 @@ function AdvertPage() {
   const handleDelete = async () => {
     await dispatch(advertDelete(advertId))
     navigate('/')
-    window.location.reload()
   };
 
   if (isLoading) {

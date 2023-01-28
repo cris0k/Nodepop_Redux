@@ -184,8 +184,9 @@ export const advertDeleteRequest = () => ({
   type: ADVERT_DELETE_REQUEST,
 });
 
-export const advertDeleteSuccess = () => ({
-  type: ADVERT_DELETE_SUCCESS
+export const advertDeleteSuccess = advert => ({
+  type: ADVERT_DELETE_SUCCESS,
+  payload : advert
 });
 
 export const advertDeleteFailure = error => ({
@@ -199,7 +200,7 @@ export const advertDelete = advertId => {
     try {
       dispatch(advertDeleteRequest());
       await api.adverts.deleteAdvert(advertId);
-      dispatch(advertDeleteSuccess());
+      dispatch(advertDeleteSuccess(advertId));
     
     } catch (error) {
       dispatch(advertDeleteFailure(error));
